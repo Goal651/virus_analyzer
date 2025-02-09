@@ -12,7 +12,7 @@ GREEN="\e[32m"
 YELLOW="\e[33m"
 RESET="\e[0m"
 
-echo -e "${YELLOW}Starting system scan for suspicious files, viruses, and rootkits...${RESET}"
+echo -e "${YELLOW}Starting system analysis for viruses...${RESET}"
 
 # Function to check and install a package
 install_package() {
@@ -49,11 +49,11 @@ install_package() {
 install_package clamscan  # ClamAV
 install_package rkhunter   # Rootkit Hunter
 
-# Scan suspicious directories
+# Scanning directories
 for DIR in "${DIRS[@]}"; do
     echo -e "${GREEN}Checking directory: $DIR${RESET}"
     
-    # Look for executable files
+    # Look for executable files more likely viruses
     find "$DIR" -type f -executable 2>/dev/null | while read -r file; do
         echo -e "${RED}[!] Suspicious Executable: $file${RESET}"
     done
